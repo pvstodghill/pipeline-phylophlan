@@ -34,7 +34,7 @@ rm -rf outputs
 phylophlan -i inputs -t a \
 	   -o outputs \
 	   -d phylophlan --databases_folder db_files \
-	   --diversity low \
+	   --diversity ${PHYLOPHAN_DIVERSITY} \
 	   -f supermatrix_aa.cfg \
 	   --nproc ${THREADS}
 
