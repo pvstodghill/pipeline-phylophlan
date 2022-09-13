@@ -1,5 +1,8 @@
-# pipeline-genomes
+# pipeline-phylophlan
 
-Pipeline for downloading (NCBI or local), evaluating, and organizing a
-collection of genomes.
+Pipeline for running
+[Phylophlan](https://huttenhower.sph.harvard.edu/phylophlan) on a
+suite of genomes.
+
+FIXME: finish writing.
 
