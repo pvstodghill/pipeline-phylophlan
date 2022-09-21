@@ -3,7 +3,7 @@
 . $(dirname ${BASH_SOURCE[0]})/doit-preamble.bash
 
 if [ "$PHYLOPHLAN_FORCE_NT" ] ; then
-    FORCE_NT=--force_nucletides
+    FORCE_NT=--force_nucleotides
 fi
 
 # ------------------------------------------------------------------------
@@ -18,7 +18,60 @@ echo 1>&2 '# Creating config files'
     rm -f *.cfg
     (
 	set -x
-	phylophlan_write_default_configs.sh ${FORCE_NT}
+
+	# copied from https://github.com/biobakery/phylophlan/blob/master/phylophlan/phylophlan_write_default_configs.sh
+
+# # supermatrix_nt.cfg
+# phylophlan_write_config_file -o ./supermatrix_nt.cfg \
+#     -d n \
+#     --db_dna makeblastdb \
+#     --map_dna blastn \
+#     --msa mafft \
+#     --trim trimal \
+#     --tree1 fasttree \
+#     --tree2 raxml \
+#     --overwrite \
+#     --verbose ${FORCE_NT}
+
+# # supertree_nt.cfg
+# phylophlan_write_config_file -o ./supertree_nt.cfg \
+#     -d n \
+#     --db_dna makeblastdb \
+#     --map_dna blastn \
+#     --msa mafft \
+#     --trim trimal \
+#     --gene_tree1 fasttree \
+#     --gene_tree2 raxml \
+#     --tree1 astral \
+#     --overwrite \
+#     --verbose ${FORCE_NT}
+
+# supermatrix_aa.cfg
+phylophlan_write_config_file -o ./supermatrix_aa.cfg \
+    -d a \
+    --db_aa diamond \
+    --map_dna diamond \
+    --map_aa diamond \
+    --msa mafft \
+    --trim trimal \
+    --tree1 fasttree \
+    --tree2 raxml \
+    --overwrite \
+    --verbose ${FORCE_NT}
+
+# supertree_aa.cfg
+phylophlan_write_config_file -o ./supertree_aa.cfg \
+    -d a \
+    --db_aa diamond \
+    --map_dna diamond \
+    --map_aa diamond \
+    --msa mafft \
+    --trim trimal \
+    --gene_tree1 fasttree \
+    --gene_tree2 raxml \
+    --tree1 astral \
+    --overwrite \
+    --verbose ${FORCE_NT}
     )
 )
 
@@ -43,26 +96,18 @@ for CONFIG in ${PHYLOPHLAN_CONFIGS} ; do
 	exit 1
     fi
     CONFIG_NAME="$(basename "${CONFIG}" .cfg)"
-    case "${CONFIG_NAME}" in
-	*_aa)
-	    INPUTS=inputs_aa
-	    TYPE=a
-	    ;;
-	*_nt)
-	    INPUTS=inputs_nt
-	    TYPE=n
-	    ;;
-	*)
-	    echo 1>&2 "Cannot determine type: ${CONFIG_NAME}"
-	    exit 1
-    esac
+    if [ -z "$PHYLOPHLAN_FORCE_NT" ] ; then
+	INPUTS=inputs_aa
+    else
+	INPUTS=inputs_nt
+    fi
 
     OUTPUTS=outputs_${CONFIG_NAME}
 
     (
 	cd ${DATA}
 	set -x
-	phylophlan -i ${INPUTS} -t ${TYPE} \
+	phylophlan -i ${INPUTS} -t a \
 		   -o ${OUTPUTS} \
 		   -d "${PHYLOPHLAN_DB}" \
 		    ${FORCE_NT} \

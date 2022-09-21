@@ -19,7 +19,7 @@ PHYLOPHLAN_DB=phylophlan
 PHYLOPHLAN_CONFIGS=
 PHYLOPHLAN_CONFIGS+=" supermatrix_aa.cfg"
 #PHYLOPHLAN_CONFIGS+=" supermatrix_nt.cfg" ## phylophlan and amphora2 are only aa
-PHYLOPHLAN_CONFIGS+=" supertree_aa.cfg"
+#PHYLOPHLAN_CONFIGS+=" supertree_aa.cfg" ## requires astral?
 #PHYLOPHLAN_CONFIGS+=" supertree_nt.cfg" ## phylophlan and amphora2 are only aa
 
 #PHYLOPHLAN_FORCE_NT=yes
