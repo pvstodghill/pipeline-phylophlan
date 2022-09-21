@@ -18,11 +18,17 @@ PHYLOPHLAN_DB=phylophlan
 
 PHYLOPHLAN_CONFIGS=
 PHYLOPHLAN_CONFIGS+=" supermatrix_aa.cfg"
-#PHYLOPHLAN_CONFIGS+=" supermatrix_nt.cfg" ## phylophlan and amphora2 are only aa
-#PHYLOPHLAN_CONFIGS+=" supertree_aa.cfg" ## requires astral?
-#PHYLOPHLAN_CONFIGS+=" supertree_nt.cfg" ## phylophlan and amphora2 are only aa
+#PHYLOPHLAN_CONFIGS+=" supermatrix_nt.cfg" ## broken - phylophlan and amphora2 are only aa
+#PHYLOPHLAN_CONFIGS+=" supertree_aa.cfg" ## broken; requires ASTRAL
+#PHYLOPHLAN_CONFIGS+=" supertree_nt.cfg" ## broken - phylophlan and amphora2 are only aa
 
 #PHYLOPHLAN_FORCE_NT=yes
+
+# path to [USEARCH](https://www.drive5.com/usearch/)
+# USEARCH_EXE_PATH=/.../bin/usearch
+
+# path to [Astral](https://github.com/smirarab/ASTRAL/)
+# ASTRAL_ZIP_PATH=/.../src/Astral.X.Y.Z.zip
 
 # ------------------------------------------------------------------------
 
